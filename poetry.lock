@@ -134,6 +134,17 @@ typing-extensions = "*"
 
 [[package]]
 category = "main"
+description = "Web APIs for Django, made easy."
+name = "djangorestframework"
+optional = false
+python-versions = ">=3.5"
+version = "3.11.0"
+
+[package.dependencies]
+django = ">=1.11"
+
+[[package]]
+category = "main"
 description = "Read metadata from Python packages"
 marker = "python_version < \"3.8\""
 name = "importlib-metadata"
@@ -482,7 +493,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "c11319604feff16a4d409f3b5405d3c84c0c936e996d6053fcb677eb1623800c"
+content-hash = "23a55e312eab4a1c6a54d85ecc872089569c018c84b1cc83e62768dc23902bdc"
 python-versions = ">=3.7"
 
 [metadata.files]
@@ -533,6 +544,10 @@ django = [
 django-stubs = [
     {file = "django-stubs-1.2.0.tar.gz", hash = "sha256:c0515576de547bb33057e24d1b0294d10a68e55150ee32fc964f1082192ab012"},
     {file = "django_stubs-1.2.0-py3-none-any.whl", hash = "sha256:ca565958a66c0772a11bf95e415d0bcd476eb59919a7ed1a417cc93315d68809"},
+]
+djangorestframework = [
+    {file = "djangorestframework-3.11.0-py3-none-any.whl", hash = "sha256:05809fc66e1c997fd9a32ea5730d9f4ba28b109b9da71fccfa5ff241201fd0a4"},
+    {file = "djangorestframework-3.11.0.tar.gz", hash = "sha256:e782087823c47a26826ee5b6fa0c542968219263fb3976ec3c31edab23a4001f"},
 ]
 importlib-metadata = [
     {file = "importlib_metadata-1.5.0-py2.py3-none-any.whl", hash = "sha256:b97607a1a18a5100839aec1dc26a1ea17ee0d93b20b0f008d80a5a050afb200b"},

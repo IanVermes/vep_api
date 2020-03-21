@@ -10,6 +10,7 @@ django = ">=2.2"
 psycopg2-binary = "*"
 pytest = "*"
 uwsgi = "*"
+djangorestframework = "^3.11.0"
 
 [tool.poetry.dev-dependencies]
 ipython = "*"
