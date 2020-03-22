@@ -1,10 +1,10 @@
-# vep_api
+# vep_webapp
 Proof of concept for an API and Frontend to support of the ensembl-vep tool
 
 
 ## Setup
 
-1. Clone this repo & `cd vep_api`
+1. Clone this repo & `cd vep_webapp`
 2. [Install Poetry](https://python-poetry.org/docs/#installation), as its the
    package manager for this project
 3. [Install PostGres](https://www.postgresql.org/), v11 or v12 are fine.

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "vep_api"
+name = "vep_webapp"
 version = "0.1.0"
 description = "API and frontend for VEP tool"
 authors = ["Ian Vermes <ian.vermes@gmail.com>"]
