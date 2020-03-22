@@ -14,8 +14,7 @@ def _obfuscate_uploaded_filename(instance, filename: str) -> str:
 
 class UploadVcf(models.Model):
     file = models.FileField(
-        verbose_name="Uploaded Vcf",
-        upload_to=_record_original_and_obfuscate_stored_filename,
+        verbose_name="Uploaded Vcf", upload_to=_obfuscate_uploaded_filename,
     )
 
     original_filename = models.CharField(
