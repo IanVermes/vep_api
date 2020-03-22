@@ -130,3 +130,6 @@ dmypy.json
 
 # VScode
 .vscode
+
+# Ignore files that were uploaded
+uploaded_files/*

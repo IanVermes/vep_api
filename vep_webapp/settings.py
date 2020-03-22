@@ -118,5 +118,5 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 # Base upload file path & URL
-UPLOADED_FILES_ROOT = os.path.join(BASE_DIR, "..", "uploaded_files")
-UPLOADED_URL = "/uploaded/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploaded_files")
+MEDIA_URL = "/media/"
