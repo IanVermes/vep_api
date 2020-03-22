@@ -116,3 +116,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# Base upload file path & URL
+UPLOADED_FILES_ROOT = os.path.join(BASE_DIR, "..", "uploaded_files")
+UPLOADED_URL = "/uploaded/"
