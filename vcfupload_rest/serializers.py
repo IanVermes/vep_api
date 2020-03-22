@@ -7,4 +7,4 @@ class UploadVcfSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UploadVcf
-        fields = ("pk", "file")
+        fields = ("pk", "file", "original_filename")
