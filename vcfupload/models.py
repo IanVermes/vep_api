@@ -7,7 +7,7 @@ from pathlib import Path
 
 def _obfuscate_uploaded_filename(instance, filename: str) -> str:
     "Record the original filename and obfuscate the filename as stored in the DB"
-    instance.original_filename = filename
+    instance.original_filename = Path(filename).name
     ext = Path(filename).suffix
     return str(uuid.uuid4()) + ext
 
