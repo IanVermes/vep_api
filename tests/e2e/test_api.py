@@ -26,7 +26,6 @@ def test_api_POST_ping_RESP_pong_with_valid_data(post_json_get_response):
 
     # When
     response, called_url = post_json_get_response(expected_path, input_json)
-    print(f"*** {called_url=}")
 
     # Then
     assert called_url.endswith(expected_path)
@@ -42,7 +41,6 @@ def test_api_POST_ping_RESP_pong_with_invalid_data(post_json_get_response):
 
     # When
     response, called_url = post_json_get_response(expected_path, input_json)
-    print(f"*** {called_url=}")
 
     # Then
     assert called_url.endswith(expected_path)
