@@ -12,6 +12,9 @@ def ping(request):
     """
     if request.method == "POST":
         serializer = PingSerializer(data=request.data)
-        return Response(data={"data": "pong"}, status=status.HTTP_201_CREATED)
+        if serializer.is_valid():
+            return Response(data={"data": "pong"}, status=status.HTTP_201_CREATED)
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_404_NOT_FOUND)
