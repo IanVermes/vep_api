@@ -13,6 +13,7 @@ services:
     stop_signal: SIGINT # The devserver only stops on SIGINT.
     stdin_open: true
     tty: true
+    user: vep
     volumes:
       - $HOME/vep_data:/opt/vep/.vep
     ports:
