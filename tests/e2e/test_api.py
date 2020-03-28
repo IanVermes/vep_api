@@ -47,3 +47,41 @@ def test_api_POST_ping_RESP_pong_with_invalid_data(post_json_get_response):
     # 400 response status code indicates that the server cannot or will not
     # process the request i.e. Bad Request
     assert response.status_code == 400
+
+
+@pytest.mark.e2e
+def test_api_POST_vcf_file_RESP_formatted_json_with_valid_file(
+    post_json_get_response, valid_vcf_file
+):
+    # Given
+    expected_path = "/api/vcf/"
+    expected_response_json = {"is_valid": True}
+    with open(valid_vcf_file, "rb") as handle:
+        input_data = {"vcf_file": handle}
+
+        # When
+        response, called_url = post_json_get_response(expected_path, input_data)
+
+    # Then
+    assert called_url.endswith(expected_path)
+    assert response.status_code == 201
+    assert response.json() == expected_response_json
+
+
+@pytest.mark.e2e
+def test_api_POST_vcf_file_RESP_formatted_json_with_invalid_file(
+    post_json_get_response, invalid_vcf_file
+):
+    # Given
+    expected_path = "/api/vcf/"
+    expected_response_json = {"is_valid": False}
+    with open(invalid_vcf_file, "rb") as handle:
+        input_data = {"vcf_file": handle}
+
+        # When
+        response, called_url = post_json_get_response(expected_path, input_data)
+
+    # Then
+    assert called_url.endswith(expected_path)
+    assert response.status_code == 400
+    assert response.json() == expected_response_json

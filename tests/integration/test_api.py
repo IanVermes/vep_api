@@ -29,3 +29,35 @@ def test_api_POST_ping_RESP_pong_with_invalid_data(client):
     # 400 response status code indicates that the server cannot or will not
     # process the request i.e. Bad Request
     assert response.status_code == 400
+
+
+def test_api_POST_vcf_file_RESP_formatted_json_with_valid_file(client, valid_vcf_file):
+    # Given
+    expected_path = "/api/vcf/"
+    expected_response_json = {"is_valid": True}
+    with open(valid_vcf_file, "rb") as handle:
+        input_data = {"vcf_file": handle}
+
+        # When
+        response = client.post(expected_path, input_data)
+
+    # Then
+    assert response.status_code == 201
+    assert response.json() == expected_response_json
+
+
+def test_api_POST_vcf_file_RESP_formatted_json_with_invalid_file(
+    client, invalid_vcf_file
+):
+    # Given
+    expected_path = "/api/vcf/"
+    expected_response_json = {"is_valid": False}
+    with open(invalid_vcf_file, "rb") as handle:
+        input_data = {"vcf_file": handle}
+
+        # When
+        response = client.post(expected_path, input_data)
+
+    # Then
+    assert response.status_code == 400
+    assert response.json() == expected_response_json
