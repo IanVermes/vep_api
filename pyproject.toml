@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "vep_webapp"
+name = "webvep"
 version = "0.1.0"
 description = "API and frontend for VEP tool"
 authors = ["Ian Vermes <ian.vermes@gmail.com>"]
@@ -9,7 +9,6 @@ python = ">=3.7"
 django = ">=2.2"
 psycopg2-binary = "*"
 pytest = "*"
-uwsgi = "*"
 djangorestframework = "^3.11.0"
 markdown = "^3.2.1"
 django-filter = "^2.2.0"
