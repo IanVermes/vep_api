@@ -14,7 +14,6 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./webvep:/opt/vep/src/ensembl-vep/webvep/webvep
       - $HOME/vep_data:/opt/vep/.vep
     ports:
       - "8000:8000"
