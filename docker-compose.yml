@@ -2,14 +2,19 @@ version: "3"
 
 services:
   web:
-    command: "python3.8 webvep/code/manage.py runserver 0.0.0.0:8000"
-    image: "vep_api"
+    command: >
+      bash -c "
+               cd webvep/webvep;
+
+               python3.8 manage.py runserver 0.0.0.0:8000;
+               "
+    image: "webvep"
     build: .
     stop_signal: SIGINT # The devserver only stops on SIGINT.
     stdin_open: true
     tty: true
     volumes:
-      - ./webvep:/opt/vep/src/ensembl-vep/vepweb/code
+      - ./webvep:/opt/vep/src/ensembl-vep/webvep/webvep
       - $HOME/vep_data:/opt/vep/.vep
     ports:
       - "8000:8000"
