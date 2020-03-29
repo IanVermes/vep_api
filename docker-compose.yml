@@ -9,7 +9,13 @@ services:
                python3.8 manage.py runserver 0.0.0.0:8000;
                "
     image: "webvep"
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - IN_DOCKER=1
+        - VEP_SCRIPT_PATH=~/src/ensembl-vep/vep
+        - VOLUME_PATH=/opt/vep/.vep
     stop_signal: SIGINT # The devserver only stops on SIGINT.
     stdin_open: true
     tty: true
