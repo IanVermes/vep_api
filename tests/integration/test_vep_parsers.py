@@ -28,6 +28,26 @@ def vep_form(vep_output_file):
     yield result
 
 
+def test_ParsedVariant_factory_method(vep_form):
+    # Given
+    raw = vep_parser.raw_parser(vep_form.raw_data)
+
+    # When
+    parsed_rows = vep_parser.ParsedVariant.from_raw(raw)
+    parsed_row = next(iter(parsed_rows))
+
+    # Then
+    assert parsed_row.chromosome == "22"
+    assert parsed_row.start == "17181903"
+    assert parsed_row.end == ""
+    assert parsed_row.gene == "ENSG00000093072"
+    assert parsed_row.transcript == "ENST00000262607"
+    assert parsed_row.transcript_type == "Transcript"
+    assert parsed_row.consequence == "synonymous variant"
+    assert parsed_row.hgvsc == "ENST00000262607.3:c.1359T>C"
+    assert parsed_row.hgvsp == "ENSP00000262607.2:p.Tyr453%3D"
+
+
 def test_raw_parser_output_has_columns_titles(vep_form):
     # Given
     expected = VEP_RAW_OUTPUT_COLUMNS
