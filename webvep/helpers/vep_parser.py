@@ -31,26 +31,27 @@ class ParsedVariant:
     hgvsp: str
 
     @classmethod
-    def from_raw(cls, raw: Raw) -> t.Iterator[ParsedVariant]:
+    def from_raw(cls, raw: Raw) -> "t.Iterator[ParsedVariant]":
         for row in raw.rows:
             yield cls._from_row(row, raw.columns_names)
 
     @classmethod
-    def _from_raw(
+    def _from_row(
         cls, row: t.Tuple[str, ...], columns_names: t.Tuple[str, ...]
-    ) -> ParsedVariant:
-        raw_values = {name: value for name, value in zip(columns_names, row)}
-        final_value_map: t.Dict[str, str] = fvm = dict()
-        fvm["chromosome"], fvm["start"], fvm["end"] = parse_location(
-            raw_values["Location"]
-        )
-        fvm["gene"] = parse_gene(raw_values["Gene"])
-        fvm["transcript"] = parse_transcript(raw_values["Feature"])
-        fvm["transcript_type"] = parse_transcript_type(raw_values["Feature_type"])
-        fvm["consequence"] = ", ".join(parse_consequence(raw_values["Consequence"]))
-        fvm["hgvsc"] = parse_hgvsc(raw_values["Extra"])
-        fvm["hgvsp"] = parse_hgvsp(raw_values["Extra"])
-        return cls(**final_value_map)
+    ) -> "ParsedVariant":
+        # rvm -> Raw value map - short variable name to improve readability in method
+        rvm = {name: value for name, value in zip(columns_names, row)}
+        # cvm -> Class value map
+        cvm: t.Dict[str, str] = dict()
+
+        cvm["chromosome"], cvm["start"], cvm["end"] = parse_location(rvm["Location"])
+        cvm["gene"] = parse_gene(rvm["Gene"])
+        cvm["transcript"] = parse_transcript(rvm["Feature"])
+        cvm["transcript_type"] = parse_transcript_type(rvm["Feature_type"])
+        cvm["consequence"] = ", ".join(parse_consequence(rvm["Consequence"]))
+        cvm["hgvsc"] = parse_hgvsc(rvm["Extra"])
+        cvm["hgvsp"] = parse_hgvsp(rvm["Extra"])
+        return cls(**cvm)
 
 
 def raw_parser(data: bytes) -> Raw:
