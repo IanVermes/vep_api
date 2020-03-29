@@ -42,7 +42,7 @@ def test_ProcessVcfForm_tester_cmd_checks_vep_script_works():
     processor = vep_helper.ProcessVcfForm()
 
     # When
-    cmd = processor.generate_vep_test_command()
+    cmd = processor.generate_vep_test_command(processor.VEP_SCRIPT_PATH)
     outcome, err_msg = vep_helper.execute_subprocess(cmd)
 
     # Then

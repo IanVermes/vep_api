@@ -27,9 +27,7 @@ def invalid_vcf_file():
 
 
 def pytest_collection_modifyitems(config, items):
-    if config.getoption("--run-e2e"):
-        # --run-e2e given in cli: do not skip e2e tests
-        return
+
     skip_slow = pytest.mark.skip(
         reason=(
             "tests should not be called within a "
@@ -42,11 +40,16 @@ def pytest_collection_modifyitems(config, items):
             "docker image: need --run-in-docker option to run "
         )
     )
+
+    run_e2e_flag = bool(config.getoption("--run-e2e"))
+    run_in_docker_flag = bool(config.getoption("--run-in-docker"))
+
     for item in items:
-        if "e2e" in item.keywords:
+        if "e2e" in item.keywords and not run_e2e_flag:
             item.add_marker(skip_slow)
-        elif "docker" in item.keywords:
+        if "docker" in item.keywords and not run_in_docker_flag:
             item.add_marker(skip_in_docker)
+    return
 
 
 def pytest_addoption(parser):

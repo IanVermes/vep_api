@@ -19,6 +19,6 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - IN_DOCKER = 1
-      - VEP_SCRIPT_PATH = ~/src/ensembl-vep/vep
-      - VOLUME_PATH = /opt/vep/.vep
+      - IN_DOCKER=1
+      - VEP_SCRIPT_PATH=~/src/ensembl-vep/vep
+      - VOLUME_PATH=/opt/vep/.vep

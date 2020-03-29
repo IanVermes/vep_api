@@ -16,7 +16,7 @@ if t.TYPE_CHECKING:
 class ProcessVcfForm:
     def __init__(self):
         self.IN_DOCKER = bool(os.getenv("IN_DOCKER", 0))
-        self.VEP_SCRIPT_PATH = os.getenv("VEP_SCRIPT_PATH", "")
+        self.VEP_SCRIPT_PATH = os.getenv("VEP_SCRIPT_PATH", ".")
         self.VOLUME_PATH = os.getenv("VOLUME_PATH", "")
         self._check = False
 
