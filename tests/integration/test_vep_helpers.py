@@ -8,8 +8,11 @@ def test_ProcessVcfForm_raises_runtime_error_outside_docker():
     processor = vep_helper.ProcessVcfForm()
 
     # Then
-    with pytest.raises(RuntimeError):
-        processor.docker_check()
+    if processor.IN_DOCKER:
+        pass
+    else:
+        with pytest.raises(RuntimeError):
+            processor.docker_check()
 
 
 @pytest.mark.docker
@@ -40,6 +43,7 @@ def test_ProcessVcfForm_executes_without_error_inside_docker_when_env_checking()
 def test_ProcessVcfForm_tester_cmd_checks_vep_script_works():
     # Given
     processor = vep_helper.ProcessVcfForm()
+    processor.env_check()
 
     # When
     cmd = processor.generate_vep_test_command(processor.VEP_SCRIPT_PATH)
