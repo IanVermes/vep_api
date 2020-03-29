@@ -23,6 +23,15 @@ def invalid_vcf_file():
         return filepath
 
 
+@pytest.fixture(scope="module")
+def vep_output_file():
+    filepath = pathlib.Path("tests/resources/vep_output_file.txt")
+    if not filepath.exists():
+        raise FileNotFoundError(filepath)
+    else:
+        return filepath
+
+
 ## PYTEST SETUP
 
 
