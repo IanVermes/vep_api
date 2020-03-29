@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import functools
 import re
 
 import typing as t
@@ -6,6 +7,7 @@ import typing as t
 _NA_TOKEN = "-"
 _EMPTY_STRING = ""
 _LOCATION_RGX_PATTERN = re.compile(r"(\w+):(\w+)(?:-(\w+))?")
+_TRANSCRIPT_TYPE_RGX_PATTERN = re.compile(r"[A-Z][^A-Z]*")
 
 
 @dataclass
@@ -47,6 +49,7 @@ def raw_parser(data: bytes) -> Raw:
     )
 
 
+@functools.lru_cache(maxsize=32)
 def parse_location(value: str) -> t.Tuple[str, str, str]:
     if value in {_NA_TOKEN, _EMPTY_STRING}:
         return (_EMPTY_STRING, _EMPTY_STRING, _EMPTY_STRING)
