@@ -5,6 +5,8 @@ from importlib.resources import read_text
 import re
 import typing as t
 
+import vcfpy
+
 _BINOMIAL_PATTERN = re.compile(r"((?:[a-zA-Z]+_[a-zA-Z]+))")
 
 
@@ -33,3 +35,13 @@ def _extract_binomial_names() -> t.Set[t.Tuple[str, str]]:
 
 
 BINOMIAL_NAMES = _extract_binomial_names()
+
+
+def validate_vcf_content(file: t.TextIO) -> bool:
+    try:
+        _ = vcfpy.Reader(file)
+    except vcfpy.IncorrectVCFFormat:
+        outcome = False
+    else:
+        outcome = True
+    return outcome
