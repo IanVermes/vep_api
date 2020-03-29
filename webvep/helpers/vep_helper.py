@@ -18,6 +18,9 @@ class ProcessVcfForm:
         self.IN_DOCKER = bool(os.getenv("IN_DOCKER", 0))
         self.VEP_SCRIPT_PATH = os.getenv("VEP_SCRIPT_PATH", ".")
         self.VOLUME_PATH = os.getenv("VOLUME_PATH", "")
+        self.UNFORMATTED_PERL_COMMAND = (
+            "perl {script} --offline --hgvs  -i {in_file} -o {out_file}"
+        )
         self._check = False
 
     def docker_check(self):
@@ -92,7 +95,7 @@ class ProcessVcfForm:
     def generate_vep_script_command(
         self, script: pathlib.Path, in_file: pathlib.Path, out_file: pathlib.Path
     ) -> t.List[str]:
-        cmd = "perl {script} --offline -i {in_file} -o {out_file}".format(
+        cmd = self.UNFORMATTED_PERL_COMMAND.format(
             script=shlex.quote(str(script)),
             in_file=shlex.quote(str(in_file)),
             out_file=shlex.quote(str(out_file)),

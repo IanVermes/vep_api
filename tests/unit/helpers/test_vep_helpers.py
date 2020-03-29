@@ -116,7 +116,9 @@ def test_ProcessVcfForm_generate_vep_script_command():
     script = pathlib.Path("~/src/ensembl-vep/vep")
     in_file = pathlib.Path("/opt/vep/.vep/input/homo_sapiens_GRCh38.vcf")
     out_file = pathlib.Path("/opt/vep/.vep/output.txt")
-    expected_cmd = f"perl {str(script)} --offline -i {str(in_file)} -o {str(out_file)}"
+    expected_cmd = (
+        f"perl {str(script)} --offline --hgvs -i {str(in_file)} -o {str(out_file)}"
+    )
 
     # When
     processor = vep_helper.ProcessVcfForm()
