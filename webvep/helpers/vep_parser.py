@@ -57,3 +57,17 @@ def parse_location(value: str) -> t.Tuple[str, str, str]:
             return chromosome, start, stop
         else:
             return (_EMPTY_STRING, _EMPTY_STRING, _EMPTY_STRING)
+
+
+def parse_gene(value: str) -> str:
+    if value in {_NA_TOKEN, _EMPTY_STRING}:
+        return _EMPTY_STRING
+    else:
+        return value
+
+
+def parse_transcript(value: str) -> str:
+    if value in {_NA_TOKEN, _EMPTY_STRING}:
+        return _EMPTY_STRING
+    else:
+        return value
