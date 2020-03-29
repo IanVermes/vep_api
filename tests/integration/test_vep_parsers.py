@@ -68,7 +68,7 @@ def test_raw_parser_output_has_correct_first_row(vep_form):
         "Y",
         "taT/taC",
         "-",
-        "IMPACT=LOW;STRAND=-1",
+        "IMPACT=LOW;STRAND=-1;HGVSc=ENST00000262607.3:c.1359T>C;HGVSp=ENSP00000262607.2:p.Tyr453%3D",
     )
 
     # When
@@ -94,7 +94,7 @@ def test_raw_parser_output_has_correct_last_row(vep_form):
         "-",
         "-",
         "-",
-        "IMPACT=MODIFIER;STRAND=1;FLAGS=cds_start_NF",
+        "IMPACT=MODIFIER;STRAND=1;FLAGS=cds_start_NF;HGVSc=ENST00000402472.2:c.*1452A>G",
     )
 
     # When
