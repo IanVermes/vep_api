@@ -143,3 +143,15 @@ def test_parse_hgvsp(input_value, expected_value):
 
     # Then
     assert actual_value == expected_value
+
+
+def test_parse_vep_version():
+    # Given
+    value = "ENSEMBL VARIANT EFFECT PREDICTOR v99.2"
+    expected = "v99.2"
+
+    # When
+    actual = vep_parser.parse_vep_version(value)
+
+    # Then
+    assert actual == expected

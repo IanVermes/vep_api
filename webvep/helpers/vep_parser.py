@@ -9,6 +9,7 @@ _EMPTY_STRING = ""
 _LOCATION_RGX_PATTERN = re.compile(r"(\w+):(\w+)(?:-(\w+))?")
 # Splits `MotifFeature` -> `Motif Feature`
 _TRANSCRIPT_TYPE_RGX_PATTERN = re.compile(r"[A-Z][^A-Z]*")
+_VEP_VERSION_RGX_PATTERN = re.compile(r"(v\d{2,3}\.\d{1,2})")
 
 
 @dataclass
@@ -163,3 +164,11 @@ def _parse_hgvs_strings(value: str, match_token: str) -> str:
         else:
             hgvs_value = _EMPTY_STRING
         return hgvs_value
+
+
+def parse_vep_version(value: str) -> str:
+    match = _VEP_VERSION_RGX_PATTERN.search(value)
+    if match:
+        return match.group(0)
+    else:
+        raise ValueError(f"Could not find VEP version, got {value=}")
