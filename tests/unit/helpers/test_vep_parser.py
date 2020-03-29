@@ -74,19 +74,19 @@ def test_parse_transcript_type(input_value, expected_value):
 @pytest.mark.parametrize(
     "input_value,expected_value",
     [
-        pytest.param("5_prime_UTR_variant", ("5_prime_UTR_variant",)),
-        pytest.param("downstream_gene_variant", ("downstream_gene_variant",)),
+        pytest.param("5_prime_UTR_variant", ("5 prime UTR variant",)),
+        pytest.param("downstream_gene_variant", ("downstream gene variant",)),
         pytest.param(
             "5_prime_UTR_variant,NMD_transcript_variant",
-            ("5_prime_UTR_variant", "NMD_transcript_variant"),
+            ("5 prime UTR variant", "NMD transcript variant"),
         ),
         pytest.param(
             "incomplete_terminal_codon_variant,coding_sequence_variant",
-            ("incomplete_terminal_codon_variant", "coding_sequence_variant"),
+            ("incomplete terminal codon variant", "coding sequence variant"),
         ),
         pytest.param(
-            "splice_region_variant,3_prime_UTR_variant,NMD_transcript_variant",
-            ("splice_region_variant", "3_prime_UTR_variant", "NMD_transcript_variant"),
+            "splice_region_variant,3_prime_UTR_variant,NMD transcript variant",
+            ("splice region variant", "3 prime UTR variant", "NMD transcript variant"),
         ),
         pytest.param("-", tuple()),
     ],

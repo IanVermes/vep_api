@@ -90,3 +90,16 @@ def parse_transcript_type(value: str) -> str:
             # This conditional may arise if the regex match doesn't happen but most
             # strings should be splitable.
             return value
+
+
+def parse_consequence(value: str) -> t.Tuple[str, ...]:
+    if value in {_NA_TOKEN, _EMPTY_STRING}:
+        return tuple()
+    else:
+        consequences = [_format_consequence(c) for c in value.split(",")]
+        return tuple(consequences)
+
+
+@functools.lru_cache(maxsize=32)
+def _format_consequence(value: str) -> str:
+    return value.replace("_", " ")
