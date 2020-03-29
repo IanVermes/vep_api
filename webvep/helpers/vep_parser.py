@@ -7,6 +7,7 @@ import typing as t
 _NA_TOKEN = "-"
 _EMPTY_STRING = ""
 _LOCATION_RGX_PATTERN = re.compile(r"(\w+):(\w+)(?:-(\w+))?")
+# Splits `MotifFeature` -> `Motif Feature`
 _TRANSCRIPT_TYPE_RGX_PATTERN = re.compile(r"[A-Z][^A-Z]*")
 
 
@@ -74,3 +75,18 @@ def parse_transcript(value: str) -> str:
         return _EMPTY_STRING
     else:
         return value
+
+
+@functools.lru_cache(maxsize=32)
+def parse_transcript_type(value: str) -> str:
+    # Check transcript is in formatted map, otherwise
+    if value in {_NA_TOKEN, _EMPTY_STRING}:
+        return _EMPTY_STRING
+    else:
+        matched_split_string = _TRANSCRIPT_TYPE_RGX_PATTERN.findall(value)
+        if matched_split_string:
+            return " ".join(matched_split_string)
+        else:
+            # This conditional may arise if the regex match doesn't happen but most
+            # strings should be splitable.
+            return value

@@ -58,8 +58,8 @@ def test_parse_transcript(input_value, expected_value):
     "input_value,expected_value",
     [
         pytest.param("Transcript", "Transcript"),
-        pytest.param("RegulatoryFeature", "RegulatoryFeature"),
-        pytest.param("MotifFeature", "MotifFeature"),
+        pytest.param("RegulatoryFeature", "Regulatory Feature"),
+        pytest.param("MotifFeature", "Motif Feature"),
         pytest.param("-", ""),
     ],
 )
