@@ -11,7 +11,7 @@ _LOCATION_RGX_PATTERN = re.compile(r"(\w+):(\w+)(?:-(\w+))?")
 # Splits `MotifFeature` -> `Motif Feature`
 _TRANSCRIPT_TYPE_RGX_PATTERN = re.compile(r"[A-Z][^A-Z]*")
 _VEP_VERSION_RGX_PATTERN = re.compile(r"(v\d{2,3}\.\d{1,2})")
-_TIME_STAMP_FORMAT = "%Y-%m-%d %H:%M:S"
+_TIME_STAMP_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 @dataclass
@@ -26,6 +26,13 @@ class ParsedResult:
     vep_version: str
     run_date: str
     variants: "t.Tuple[ParsedVariant, ...]"
+
+    def to_json(self):
+        return {
+            "VEP-version": self.vep_version,
+            "run-date": self.run_date,
+            "results": [v.to_json() for v in self.variants],
+        }
 
     @classmethod
     def from_raw(cls, raw: Raw) -> "ParsedResult":
@@ -54,6 +61,21 @@ class ParsedVariant:
     consequence: str
     hgvsc: str
     hgvsp: str
+
+    def to_json(self):
+        return {
+            "location": {
+                "chromosome": self.chromosome,
+                "start": self.start,
+                "end": self.end,
+            },
+            "gene": self.gene,
+            "transcript": self.transcript,
+            "feature-type": self.transcript_type,
+            "consequence": self.consequence.split(", "),
+            "hgvsc": self.hgvsc,
+            "hgvsp": self.hgvsp,
+        }
 
     @classmethod
     def from_raw(cls, raw: Raw) -> "t.Iterator[ParsedVariant]":
