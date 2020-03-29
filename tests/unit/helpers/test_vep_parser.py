@@ -132,7 +132,7 @@ def test_parse_hgvsc(input_value, expected_value):
         pytest.param("IMPACT=MODIFIER;DISTANCE=1368;STRAND=-1", ""),
         pytest.param(
             "IMPACT=LOW;STRAND=-1;HGVSc=ENST00000263207.8:c.1290C>T;HGVSp=ENSP00000263207.3:p.Gly430%3D",
-            "HGVSp=ENSP00000263207.3:p.Gly430%3D",
+            "ENSP00000263207.3:p.Gly430%3D",
         ),
         pytest.param("-", ""),
     ],

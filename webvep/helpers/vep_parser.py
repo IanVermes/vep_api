@@ -103,3 +103,27 @@ def parse_consequence(value: str) -> t.Tuple[str, ...]:
 @functools.lru_cache(maxsize=32)
 def _format_consequence(value: str) -> str:
     return value.replace("_", " ")
+
+
+def parse_hgvsc(value: str) -> str:
+    return _parse_hgvs_strings(value, match_token="HGVSc=")
+
+
+def parse_hgvsp(value: str) -> str:
+    return _parse_hgvs_strings(value, match_token="HGVSp=")
+
+
+def _parse_hgvs_strings(value: str, match_token: str) -> str:
+    if value in {_NA_TOKEN, _EMPTY_STRING}:
+        return _EMPTY_STRING
+    else:
+        sub_values = value.split(";")
+        for sub_value in sub_values:
+            if match_token in sub_value:
+                hgvs_value = sub_value.replace(match_token, _EMPTY_STRING)
+                break
+            else:
+                continue
+        else:
+            hgvs_value = _EMPTY_STRING
+        return hgvs_value
