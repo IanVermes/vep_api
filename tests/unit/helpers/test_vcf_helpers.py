@@ -23,30 +23,6 @@ def test_extract_binomial_name(string, expected):
     assert actual == expected
 
 
-def test_validate_vcf_content_with_valid_file(valid_vcf_file):
-    # Given
-    with open(valid_vcf_file, "r") as handle:
-
-        # When
-        result = vcf_helpers.validate_vcf_content(handle)
-
-    # Then
-    assert result == True
-
-
-def test_validate_vcf_content_with_invalid_file(valid_vcf_file, tmp_path):
-    # Given
-    invalid_file = tmp_path / valid_vcf_file.name  # use a valid name but invalid data
-    invalid_file.write_text("# foo" * 100)
-    with open(invalid_file, "r") as handle:
-
-        # When
-        result = vcf_helpers.validate_vcf_content(handle)
-
-    # Then
-    assert result == False
-
-
 def test_module_constant_BINOMIAL_NAMES():
     assert ("bos", "taurus") in vcf_helpers.BINOMIAL_NAMES
     assert ("homo", "sapiens") in vcf_helpers.BINOMIAL_NAMES

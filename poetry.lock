@@ -654,14 +654,6 @@ six = "*"
 
 [[package]]
 category = "main"
-description = "pysam"
-name = "pysam"
-optional = false
-python-versions = "*"
-version = "0.15.4"
-
-[[package]]
-category = "main"
 description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
@@ -861,14 +853,6 @@ socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [[package]]
 category = "main"
-description = "Python 3 VCF library with good support for both reading and writing"
-name = "vcfpy"
-optional = false
-python-versions = "*"
-version = "0.12.1"
-
-[[package]]
-category = "main"
 description = "Measures number of Terminal column cells of wide-character codes"
 name = "wcwidth"
 optional = false
@@ -900,7 +884,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "2c94e022abacf0cf32ed633e3fed4cf00484d42d98f8d7c169758cf67427fc31"
+content-hash = "f6d5b25374e6a5ebb47edc46b2626bd921c0e7514bb61695d03f4b1689325d7e"
 python-versions = ">=3.7"
 
 [metadata.files]
@@ -1235,26 +1219,6 @@ pypiwin32 = [
 pyrsistent = [
     {file = "pyrsistent-0.16.0.tar.gz", hash = "sha256:28669905fe725965daa16184933676547c5bb40a5153055a8dee2a4bd7933ad3"},
 ]
-pysam = [
-    {file = "pysam-0.15.4-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:0b0f407ad96b3bd492017ee82a317ac0fc68dc858ecba9119e4ae69b1cda9910"},
-    {file = "pysam-0.15.4-cp27-cp27m-manylinux2010_i686.whl", hash = "sha256:5b6a2258e326204ee94bf4d482d9a137ce8cbb3f3cefada42c7f26802d15b95d"},
-    {file = "pysam-0.15.4-cp27-cp27m-manylinux2010_x86_64.whl", hash = "sha256:495815ef466aefa80d949ac449cd364f21cb20ee56b1a0bd623352ad3f73bf14"},
-    {file = "pysam-0.15.4-cp27-cp27mu-manylinux2010_i686.whl", hash = "sha256:00a1f62e704410343ef6a6232f5bdd29f67f88326a89757e665dee035ef36112"},
-    {file = "pysam-0.15.4-cp27-cp27mu-manylinux2010_x86_64.whl", hash = "sha256:3d5158231cab88cb8a931b78f34fb6eb939a093cb8d5273452cc12d3206e445e"},
-    {file = "pysam-0.15.4-cp35-cp35m-macosx_10_6_intel.whl", hash = "sha256:7c358f69620e7b9af7548a62ca2a1fb6b51c03fcdc79a0ca8d1839ad92a532ce"},
-    {file = "pysam-0.15.4-cp35-cp35m-manylinux2010_i686.whl", hash = "sha256:2581ab403fdba02e2261cf2f9df783f24de5530e1f77c84236707f8d8706cd91"},
-    {file = "pysam-0.15.4-cp35-cp35m-manylinux2010_x86_64.whl", hash = "sha256:00c7f094be02ba8daf2feb51467b70142f9cca22fb5336b504bc58568a2500de"},
-    {file = "pysam-0.15.4-cp36-cp36m-macosx_10_6_intel.whl", hash = "sha256:4ddcb84e471aff2f55beb5ed2d368dc6e773947c628a1a7b6d5ceec9c141ce51"},
-    {file = "pysam-0.15.4-cp36-cp36m-manylinux2010_i686.whl", hash = "sha256:0f3e42cbc9bac07cf6a880c2ae318c24aea20f43a3f3562e53068266627cb7a7"},
-    {file = "pysam-0.15.4-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:d9f116b2e32b678bbd95ba0c83a449d0a59f2deb04a6fc02f42b5cd9e406bde5"},
-    {file = "pysam-0.15.4-cp37-cp37m-macosx_10_6_intel.whl", hash = "sha256:5bcf5d49922aeaccd0dbf0b3e4327b03be2883814bf2476e83f20fc24d7be02b"},
-    {file = "pysam-0.15.4-cp37-cp37m-manylinux2010_i686.whl", hash = "sha256:179e68c5acb8cc6a79a79441ba6cffb88d7c3afb74c7b170395c248cb7b9f138"},
-    {file = "pysam-0.15.4-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:333e9e73addb0579aa8af08c6618b359bd038a3710428b7ce1caef0075392b3c"},
-    {file = "pysam-0.15.4-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:62b72de5af5b8550f376a580fecb23b81d989140cf95f8465fef2c3d96006424"},
-    {file = "pysam-0.15.4-cp38-cp38-manylinux2010_i686.whl", hash = "sha256:28fd770354ecf621ee47425bfdcf012097fa7a8ff590b49ec953d059221886c2"},
-    {file = "pysam-0.15.4-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:5a9730d9775dc30a8cc197ca3e5340b7c3cb63b66c387ecfd8e665426f083f65"},
-    {file = "pysam-0.15.4.tar.gz", hash = "sha256:a535e15cbd6e27f4ab74cabca30ca1df7eea283cb91d3b536d47fe113fee066f"},
-]
 pytest = [
     {file = "pytest-5.4.1-py3-none-any.whl", hash = "sha256:0e5b30f5cb04e887b91b1ee519fa3d89049595f428c1db76e73bd7f17b09b172"},
     {file = "pytest-5.4.1.tar.gz", hash = "sha256:84dde37075b8805f3d1f392cc47e38a0e59518fb46a431cfdaf7cf1ce805f970"},
@@ -1384,9 +1348,6 @@ typing-extensions = [
 urllib3 = [
     {file = "urllib3-1.22-py2.py3-none-any.whl", hash = "sha256:06330f386d6e4b195fbfc736b297f58c5a892e4440e54d294d7004e3a9bbea1b"},
     {file = "urllib3-1.22.tar.gz", hash = "sha256:cc44da8e1145637334317feebd728bd869a35285b93cbb4cca2577da7e62db4f"},
-]
-vcfpy = [
-    {file = "vcfpy-0.12.1.tar.gz", hash = "sha256:0cee883a4f5d167a5f39ba12029ccc5d44def6509098110f0eb7ccdf09838ef7"},
 ]
 wcwidth = [
     {file = "wcwidth-0.1.8-py2.py3-none-any.whl", hash = "sha256:8fd29383f539be45b20bd4df0dc29c20ba48654a41e661925e612311e9f3c603"},
