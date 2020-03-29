@@ -1,6 +1,11 @@
 from dataclasses import dataclass
+import re
 
 import typing as t
+
+_NA_TOKEN = "-"
+_EMPTY_STRING = ""
+_LOCATION_RGX_PATTERN = re.compile(r"(\w+):(\w+)(?:-(\w+))?")
 
 
 @dataclass
@@ -10,7 +15,7 @@ class Raw:
     rows: t.Tuple[t.Tuple[str, ...], ...]
 
 
-def raw_parser(data: bytes):
+def raw_parser(data: bytes) -> Raw:
     meta_data = []
     columns = []
     rows = []
@@ -40,3 +45,15 @@ def raw_parser(data: bytes):
         rows=tuple(rows_str),
         columns_names=tuple(column_names_str),
     )
+
+
+def parse_location(value: str) -> t.Tuple[str, str, str]:
+    if value in {_NA_TOKEN, _EMPTY_STRING}:
+        return (_EMPTY_STRING, _EMPTY_STRING, _EMPTY_STRING)
+    else:
+        match = _LOCATION_RGX_PATTERN.search(value)
+        if match:
+            chromosome, start, stop, *_rest = match.groups(default=_EMPTY_STRING)
+            return chromosome, start, stop
+        else:
+            return (_EMPTY_STRING, _EMPTY_STRING, _EMPTY_STRING)
