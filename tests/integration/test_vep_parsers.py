@@ -1,4 +1,5 @@
 import pytest
+import datetime
 
 from webvep.webvep_api.forms import VepForm
 from webvep.helpers import vep_parser
@@ -26,6 +27,20 @@ def vep_form(vep_output_file):
     result = VepForm(raw_data=vep_output_file.read_bytes(), error="")
     assert result.is_valid()
     yield result
+
+
+def test_ParsedResult_factory_method(vep_form):
+    # Given
+    raw = vep_parser.raw_parser(vep_form.raw_data)
+    expected_variant_count = len(raw.rows)
+
+    # When
+    parsed_result = vep_parser.ParsedResult.from_raw(raw)
+
+    # Then
+    assert parsed_result.vep_version == "v99.2"
+    assert datetime.datetime.strptime(parsed_result.run_date, "%Y-%m-%d %H:%M:S")
+    assert len(parsed_result.variants) == expected_variant_count
 
 
 def test_ParsedVariant_factory_method(vep_form):

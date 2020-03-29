@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import functools
 import re
+import datetime
 
 import typing as t
 
@@ -10,6 +11,7 @@ _LOCATION_RGX_PATTERN = re.compile(r"(\w+):(\w+)(?:-(\w+))?")
 # Splits `MotifFeature` -> `Motif Feature`
 _TRANSCRIPT_TYPE_RGX_PATTERN = re.compile(r"[A-Z][^A-Z]*")
 _VEP_VERSION_RGX_PATTERN = re.compile(r"(v\d{2,3}\.\d{1,2})")
+_TIME_STAMP_FORMAT = "%Y-%m-%d %H:%M:S"
 
 
 @dataclass
@@ -17,6 +19,28 @@ class Raw:
     meta_data: t.Tuple[str, ...]
     columns_names: t.Tuple[str, ...]
     rows: t.Tuple[t.Tuple[str, ...], ...]
+
+
+@dataclass
+class ParsedResult:
+    vep_version: str
+    run_date: str
+    variants: "t.Tuple[ParsedVariant, ...]"
+
+    @classmethod
+    def from_raw(cls, raw: Raw) -> "ParsedResult":
+        cvm: t.Dict[str, t.Any] = {}
+        cvm["vep_version"] = cls._find_vep_version(raw)
+        cvm["run_date"] = datetime.datetime.today().strftime(_TIME_STAMP_FORMAT)
+        cvm["variants"] = tuple(ParsedVariant.from_raw(raw))
+        return cls(**cvm)
+
+    @classmethod
+    def _find_vep_version(cls, raw: Raw) -> str:
+        value = [
+            m for m in raw.meta_data if "ENSEMBL VARIANT EFFECT PREDICTOR" in m
+        ].pop()
+        return parse_vep_version(value)
 
 
 @dataclass
