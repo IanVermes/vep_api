@@ -5,7 +5,7 @@ services:
     command: >
       bash -c "
                cd webvep/;
-               pytest -o cache_dir=/var/tmp --run-after-build -m docker_after_build;
+               pytest -o cache_dir=/var/tmp --run-after-build -m docker_after_build || { echo 'pytest --run-after-build' ; exit 1; };
 
                cd webvep/;
 
