@@ -27,7 +27,7 @@ def simple_upload(request):
                     "VEP_version": result.vep_version,
                     "run_date": result.run_date,
                 },
-                "rows": result.variants[:10],
+                "rows": result.variants,
                 "na": "n/a",
                 "show_hgvsp": bool(request.data.get("show_protein")),
                 "show_hgvsc": bool(request.data.get("show_dna")),
