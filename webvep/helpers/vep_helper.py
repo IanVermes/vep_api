@@ -1,3 +1,4 @@
+"""This module wraps the dockerised perl VEP program & process VcfForms into VepForms"""
 import uuid
 import os
 import subprocess
@@ -14,6 +15,8 @@ if t.TYPE_CHECKING:
 
 
 class ProcessVcfForm:
+    """Wrap the VEP program, piping vcf data in, piping vep result & maintain a clean filesystem"""
+
     def __init__(self):
         self.IN_DOCKER = bool(os.getenv("IN_DOCKER", 0))
         self.VEP_SCRIPT_PATH = os.getenv("VEP_SCRIPT_PATH", ".")

@@ -1,9 +1,14 @@
+"""This module processes, parses and cleans the output of the the perl VEP script."""
 from dataclasses import dataclass
 import functools
 import re
 import datetime
 
+
 import typing as t
+
+if t.TYPE_CHECKING:
+    from webvep.webvep_api.forms import VepForm
 
 _NA_TOKEN = "-"
 _EMPTY_STRING = ""
@@ -16,6 +21,8 @@ _TIME_STAMP_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 @dataclass
 class Raw:
+    """Convenience data-object that groups the different types of data of the VEP output."""
+
     meta_data: t.Tuple[str, ...]
     columns_names: t.Tuple[str, ...]
     rows: t.Tuple[t.Tuple[str, ...], ...]
@@ -23,6 +30,8 @@ class Raw:
 
 @dataclass
 class ParsedResult:
+    """A data object that represents processed & parsed VEP output, suitable for API or frontend"""
+
     vep_version: str
     run_date: str
     variants: "t.Tuple[ParsedVariant, ...]"
@@ -52,6 +61,8 @@ class ParsedResult:
 
 @dataclass
 class ParsedVariant:
+    """Data rich parsed representation of single row in the VEP output table."""
+
     chromosome: str
     start: str
     end: str
@@ -101,7 +112,15 @@ class ParsedVariant:
         return cls(**cvm)
 
 
+def parser(vep_form: "VepForm") -> ParsedResult:
+    """Convenience function, to parse the raw data of a VepForm."""
+    raw = raw_parser(vep_form.raw_data)
+    parsed_result = ParsedResult.from_raw(raw)
+    return parsed_result
+
+
 def raw_parser(data: bytes) -> Raw:
+    """Process the content of the VEP script's output into a usuable raw form."""
     meta_data = []
     columns = []
     rows = []
