@@ -15,7 +15,7 @@ def test_index_page_title(client):
 def test_index_page_content(client):
     response = client.get("/")
 
-    assert "Hello world" in str(response.content)
+    assert "VEP Uploader" in str(response.content)
 
 
 def test_index_page_status(client):

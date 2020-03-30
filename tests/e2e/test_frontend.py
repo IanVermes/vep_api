@@ -23,7 +23,7 @@ def test_index_page_title(get_response):
 def test_index_page_content(get_response):
     response, _ = get_response("/")
 
-    assert "Hello world" in str(response.content)
+    assert "VEP Uploader" in str(response.content)
 
 
 @pytest.mark.e2e

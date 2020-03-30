@@ -15,7 +15,6 @@ def home(request):
 def simple_upload(request):
     if request.method == "POST":
         serializer = VcfSerializer(data=request.data)
-        print(f"{request.data=}")
         if serializer.is_valid():
             vcf_form = serializer.save()
             vep_form = ProcessVcfForm().pipeline(vcf_form)

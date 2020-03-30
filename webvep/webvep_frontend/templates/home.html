@@ -3,62 +3,96 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
     <title>Variant Effect Predictor - VEP WebApp</title>
 </head>
 
-<body>
-    <p>Hello world</p>
+<body class="">
+    <div class="w-100 center ph6">
+        <h1 class="f1 sans-serif tc">Variant Effect Predictor - VEP Uploader - by <a
+                href="https://github.com/IanVermes/vep_api">Ian
+                Vermes<a></h1>
+    </div>
 
     {% load static %}
+    <div>
+        <div class="pa6">
+            <div class="flex justify-around">
+                <div class="w-50 ba avenir">
+                    <form method="post" enctype="multipart/form-data" action="/upload">
+                        {% csrf_token %}
+                        <div class="">
+                            <span>
+                                <input type="file" name="vcf_file">
+                                <button type="submit">Upload</button>
+                            </span>
+                        </div>
+                        <div class="">
+                            <span>
+                                <input type="checkbox" id="format_protein" name="show_protein" value="show">
+                                <label for="format_protein">Show HGVS protein sequence</label>
+                            </span>
+                        </div>
+                        <div class="">
+                            <span>
+                                <input type="checkbox" id="format_dna" name="show_dna" value="show">
+                                <label for="format_dna">Show HGVS coding sequence</label>
+                            </span>
+                        </div>
+                    </form>
+                </div>
 
-    <form method="post" enctype="multipart/form-data" action="/upload">
-        {% csrf_token %}
-        <div>
-            <input type="file" name="vcf_file">
-            <button type="submit">Upload</button>
+                <div class="w-50 ba">
+                    <div>
+                        <div class="avenir">
+                            <div class="">File uploaded: {{ file_name }}</div>
+                            {% if is_valid %}
+                            <div class="">VEP version {{ result.VEP_version }}</div>
+                            <div class="">File uploaded at {{ result.run_date }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <input type="checkbox" id="format_protein" name="show_protein" value="show">
-            <label for="format_protein">Show HGVS protein sequence</label>
+        {% if is_valid %}
+        <div class="ph6">
+            <div class="overflow-auto ba">
+                <table class="f6 w-100 sans-serif center" cellspacing="0">
+                    <thead>
+                        <tr class="stripe-dark">
+                            <th class="fw8 tc pa2 bg-white"></th>
+                            <th class="fw8 tc pa2 bg-white">Chromosome</th>
+                            <th class="fw8 tc pa2 bg-white">Start position</th>
+                            <th class="fw8 tc pa2 bg-white">End position</th>
+                            <th class="fw8 tc pa2 bg-white">Ensembl gene ID</th>
+                            <th class="fw8 tc pa2 bg-white">Transcript ID</th>
+                            <th class="fw8 tc pa2 bg-white">Feature type</th>
+                            <th class="fw8 tc pa2 bg-white">Consequence</th>
+                            {% if show_hgvsp %}<th class="fw8 tc pa2 bg-white">HGVSp</th>{% endif %}
+                            {% if show_hgvsc %}<th class="fw8 tc pa2 bg-white">HGVSc</th>{% endif %}
+                        </tr>
+                    </thead>
+                    <tbody class="lh-copy">
+                        {% for r in rows %}
+                        <tr class="stripe-dark">
+                            <th class="fw4 pa2">{{forloop.counter0}}</th>
+                            <th class="fw4 pa2">{{ r.chromosome|default:na }}</th>
+                            <th class="fw4 pa2">{{ r.start|default:na }}</th>
+                            <th class="fw4 pa2">{{ r.end|default:na }}</th>
+                            <th class="fw4 pa2">{{ r.gene|default:na }}</th>
+                            <th class="fw4 pa2">{{ r.transcript|default:na }}</th>
+                            <th class="fw4 pa2">{{ r.transcript_type|default:na }}</th>
+                            <th class="fw4 pa2">{{ r.consequence|default:na }}</th>
+                            {% if show_hgvsp %}<th class="fw4 pa2">{{ r.hgvsp|default:na }}</th>{% endif %}
+                            {% if show_hgvsc %}<th class="fw4 pa2">{{ r.hgvsc|default:na }}</th>{% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div>
-            <input type="checkbox" id="format_dna" name="show_dna" value="show">
-            <label for="format_dna">Show HGVS coding sequence</label>
-        </div>
-    </form>
-
-    <p>File uploaded: {{ file_name }}</a></p>
-    {% if is_valid %}
-    <div>VEP version {{ result.VEP_version }}</div>
-    <div>File uploaded at {{ result.run_date }}</div>
-    <br>
-    <table>
-        <tr>
-            <th>Chromosome</th>
-            <th>Start position</th>
-            <th>End position</th>
-            <th>Ensembl gene ID</th>
-            <th>Transcript ID</th>
-            <th>Feature type</th>
-            <th>Consequence</th>
-            {% if show_hgvsp %}<th>HGVSp</th>{% endif %}
-            {% if show_hgvsc %}<th>HGVSc</th>{% endif %}
-        </tr>
-        {% for r in rows %}
-        <tr>
-            <th>{{ r.chromosome|default:na }}</th>
-            <th>{{ r.start|default:na }}</th>
-            <th>{{ r.end|default:na }}</th>
-            <th>{{ r.gene|default:na }}</th>
-            <th>{{ r.transcript|default:na }}</th>
-            <th>{{ r.transcript_type|default:na }}</th>
-            <th>{{ r.consequence|default:na }}</th>
-            {% if show_hgvsp %}<th>{{ r.hgvsp|default:na }}</th>{% endif %}
-            {% if show_hgvsc %}<th>{{ r.hgvsc|default:na }}</th>{% endif %}
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
+        {% endif %}
 
 </body>
 
