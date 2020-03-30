@@ -35,19 +35,20 @@ Proof of concept for an API and Frontend to support of the ensembl-vep tool
   vep against this genome with the example human `.vcf` file.
 
 ## Testing the API
+Do `$ docker-compose up` to get the server running. I used
+[Postman](https://www.postman.com/) to test the API but curl works just as well.
 
 ### `/api/ping/` check the server is alive
 With curl and POSTing to `/api/ping/` you can get a pong back
 `$ curl -H "Content-Type: application/json" --data '{"data": "ping"}' http://localhost:8000/api/ping/`
 
-Return `{"data":"pong"}` or ```{"data":["field must be `ping`"]}```
+Returns `{"data":"pong"}` or ```{"data":["field must be `ping`"]}```
 
 ### `/api/vcf/` checks filename validity
 With curl and POSTing to `/api/vcf/` you can check if the file is valid or not.
 `$ curl -F "vcf_file=@homo_sapiens_GRCh38.vcf" http://127.0.0.1:8000/api/vcf/`
 
 Returns `{"is_valid":true}` or `{"is_valid":false}`
-
 
 ### `/api/vep/` checks filename validity
 With curl and POSTing to `/api/vep/` you can get the variant effect output of
