@@ -214,38 +214,3 @@ def test_raw_parser_output_has_expected_meta_data(vep_form):
     # Then
     assert expected_meta_data_1 in result.meta_data
     assert expected_meta_data_2 in result.meta_data
-
-
-{
-    "VEP-version": "",
-    "run-date": "",
-    "results": [
-        {
-            "location": {"chromosome": "", "start": "", "end": ""},
-            "gene": "",
-            "transcript": "",
-            "feature-type": "",
-            "consequence": "",
-            "hgvsc": "",
-            "hgvsp": "",
-        },
-        {
-            "location": {"chromosome": "", "start": "", "end": ""},
-            "gene": "",
-            "transcript": "",
-            "feature-type": "",
-            "consequence": "",
-            "hgvsc": "",
-            "hgvsp": "",
-        },
-        {
-            "location": {"chromosome": "", "start": "", "end": ""},
-            "gene": "",
-            "transcript": "",
-            "feature-type": "",
-            "consequence": "",
-            "hgvsc": "",
-            "hgvsp": "",
-        },
-    ],
-}
