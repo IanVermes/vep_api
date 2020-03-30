@@ -81,18 +81,18 @@ def test_api_POST_vep_RESP_formatted_vep_data_with_valid_file(valid_vcf_file, cl
         assert key in result_json
 
 
-# def test_api_POST_vep_RESP_formatted_vep_data_with_invalid_file(
-#     client, invalid_vcf_file
-# ):
-#     # Given
-#     expected_path = "/api/vep/"
-#     expected_response_json = {"is_valid": False}
-#     with open(invalid_vcf_file, "rb") as handle:
-#         input_data = {"vcf_file": handle}
+def test_api_POST_vep_RESP_formatted_vep_data_with_invalid_file(
+    client, invalid_vcf_file
+):
+    # Given
+    expected_path = "/api/vep/"
+    expected_response_json = {"is_valid": False}
+    with open(invalid_vcf_file, "rb") as handle:
+        input_data = {"vcf_file": handle}
 
-#         # When
-#         response = client.post(expected_path, input_data)
+        # When
+        response = client.post(expected_path, input_data)
 
-#     # Then
-#     assert response.status_code == 400
-#     assert response.json() == expected_response_json
+    # Then
+    assert response.status_code == 400
+    assert response.json() == expected_response_json
