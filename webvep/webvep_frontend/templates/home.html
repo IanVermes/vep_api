@@ -8,6 +8,58 @@
 
 <body>
     <p>Hello world</p>
+
+    {% load static %}
+
+    <form method="post" enctype="multipart/form-data" action="/upload">
+        {% csrf_token %}
+        <div>
+            <input type="file" name="vcf_file">
+            <button type="submit">Upload</button>
+        </div>
+        <div>
+            <input type="checkbox" id="format_protein" name="show_protein" value="show">
+            <label for="format_protein">Show HGVS protein sequence</label>
+        </div>
+        <div>
+            <input type="checkbox" id="format_dna" name="show_dna" value="show">
+            <label for="format_dna">Show HGVS coding sequence</label>
+        </div>
+    </form>
+
+    <p>File uploaded: {{ file_name }}</a></p>
+    {% if is_valid %}
+    <div>VEP version {{ result.VEP_version }}</div>
+    <div>File uploaded at {{ result.run_date }}</div>
+    <br>
+    <table>
+        <tr>
+            <th>Chromosome</th>
+            <th>Start position</th>
+            <th>End position</th>
+            <th>Ensembl gene ID</th>
+            <th>Transcript ID</th>
+            <th>Feature type</th>
+            <th>Consequence</th>
+            {% if show_hgvsp %}<th>HGVSp</th>{% endif %}
+            {% if show_hgvsc %}<th>HGVSc</th>{% endif %}
+        </tr>
+        {% for r in rows %}
+        <tr>
+            <th>{{ r.chromosome|default:na }}</th>
+            <th>{{ r.start|default:na }}</th>
+            <th>{{ r.end|default:na }}</th>
+            <th>{{ r.gene|default:na }}</th>
+            <th>{{ r.transcript|default:na }}</th>
+            <th>{{ r.transcript_type|default:na }}</th>
+            <th>{{ r.consequence|default:na }}</th>
+            {% if show_hgvsp %}<th>{{ r.hgvsp|default:na }}</th>{% endif %}
+            {% if show_hgvsc %}<th>{{ r.hgvsc|default:na }}</th>{% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
 </body>
 
 </html>
