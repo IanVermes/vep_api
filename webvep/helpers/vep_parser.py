@@ -222,7 +222,8 @@ def _parse_hgvs_strings(value: str, match_token: str) -> str:
         sub_values = value.split(";")
         for sub_value in sub_values:
             if match_token in sub_value:
-                hgvs_value = sub_value.replace(match_token, _EMPTY_STRING)
+                hgvs_long = sub_value.replace(match_token, _EMPTY_STRING)
+                _transcript, hgvs_value = hgvs_long.split(":")
                 break
             else:
                 continue

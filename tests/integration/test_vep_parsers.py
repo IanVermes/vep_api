@@ -81,8 +81,8 @@ def test_ParsedVariant_factory_method(vep_form):
     assert parsed_row.transcript == "ENST00000262607"
     assert parsed_row.transcript_type == "Transcript"
     assert parsed_row.consequence == "synonymous variant"
-    assert parsed_row.hgvsc == "ENST00000262607.3:c.1359T>C"
-    assert parsed_row.hgvsp == "ENSP00000262607.2:p.Tyr453%3D"
+    assert parsed_row.hgvsc == "c.1359T>C"
+    assert parsed_row.hgvsp == "p.Tyr453%3D"
 
 
 def test_ParsedVariant_to_json_method(vep_form):
@@ -98,8 +98,8 @@ def test_ParsedVariant_to_json_method(vep_form):
                 "transcript": "ENST00000262607",
                 "feature-type": "Transcript",
                 "consequence": ["synonymous variant"],
-                "hgvsc": "ENST00000262607.3:c.1359T>C",
-                "hgvsp": "ENSP00000262607.2:p.Tyr453%3D"
+                "hgvsc": "c.1359T>C",
+                "hgvsp": "p.Tyr453%3D"
             }
             """
         ),

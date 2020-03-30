@@ -104,12 +104,12 @@ def test_parse_consequence_type(input_value, expected_value):
     [
         pytest.param(
             "IMPACT=LOW;STRAND=-1;HGVSc=ENST00000262607.3:c.1359T>C;HGVSp=ENSP00000262607.2:p.Tyr453%3D",
-            "ENST00000262607.3:c.1359T>C",
+            "c.1359T>C",
         ),
         pytest.param("IMPACT=MODIFIER;DISTANCE=1368;STRAND=-1", ""),
         pytest.param(
             "IMPACT=LOW;STRAND=-1;HGVSc=ENST00000263207.8:c.1290C>T;HGVSp=ENSP00000263207.3:p.Gly430%3D",
-            "ENST00000263207.8:c.1290C>T",
+            "c.1290C>T",
         ),
         pytest.param("-", ""),
     ],
@@ -127,12 +127,12 @@ def test_parse_hgvsc(input_value, expected_value):
     [
         pytest.param(
             "IMPACT=LOW;STRAND=-1;HGVSc=ENST00000262607.3:c.1359T>C;HGVSp=ENSP00000262607.2:p.Tyr453%3D",
-            "ENSP00000262607.2:p.Tyr453%3D",
+            "p.Tyr453%3D",
         ),
         pytest.param("IMPACT=MODIFIER;DISTANCE=1368;STRAND=-1", ""),
         pytest.param(
             "IMPACT=LOW;STRAND=-1;HGVSc=ENST00000263207.8:c.1290C>T;HGVSp=ENSP00000263207.3:p.Gly430%3D",
-            "ENSP00000263207.3:p.Gly430%3D",
+            "p.Gly430%3D",
         ),
         pytest.param("-", ""),
     ],
