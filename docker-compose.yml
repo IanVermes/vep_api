@@ -4,7 +4,10 @@ services:
   web:
     command: >
       bash -c "
-               cd webvep/webvep;
+               cd webvep/;
+               pytest -o cache_dir=/var/tmp --run-after-build -m docker_after_build;
+
+               cd webvep/;
 
                python3.8 manage.py runserver 0.0.0.0:8000;
                "
